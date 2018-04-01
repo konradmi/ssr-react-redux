@@ -2,12 +2,15 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import Routes from '../client/Routes'
+import { Provider } from 'react-redux'
 
-export default ({path}) => {
+export default ({path}, store) => {
   const content = renderToString(
-    <StaticRouter location={path} context={{}}>
-      <Routes/>
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={path} context={{}}>
+        <Routes/>
+      </StaticRouter>
+    </Provider>
   )
 
   return `
